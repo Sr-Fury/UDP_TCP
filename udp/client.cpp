@@ -13,7 +13,7 @@ int main()
     sockaddr_in server_addr;
     memset(&server_addr, 0, sizeof(server_addr));
     server_addr.sin_family = AF_INET;
-    server_addr.sin_port = htons(8080);
+    server_addr.sin_port = htons(8060);
     server_addr.sin_addr.s_addr = inet_addr("127.0.0.1"); 
 
     std::string user_input;
@@ -25,6 +25,9 @@ int main()
     {
         std::cout << "Write messege or exit: ";
         std::getline(std::cin, user_input);
+
+        if (user_input.empty())
+            continue; 
 
         if (user_input == "exit")
             break;
