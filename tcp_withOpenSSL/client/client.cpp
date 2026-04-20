@@ -1,4 +1,5 @@
 #include "client.h"
+#include "message_crypto.h"
 
 Client::Client(QObject *parent) : QObject(parent) {
     socket = new QSslSocket(this);
@@ -16,6 +17,9 @@ void Client::connectToServer(const QString &ip, quint16 port) {
 void Client::sendMessage(const QString &message) {
     if (socket->state() == QAbstractSocket::ConnectedState) {
         QByteArray data = message.toUtf8() + "\n";
+
+        apply_xor_cipher(data.data(), data.size());
+
         socket->write(data);
         socket->flush(); 
     }
@@ -24,6 +28,9 @@ void Client::sendMessage(const QString &message) {
 void Client::onReadyRead() {
     while (socket->canReadLine()) {
         QByteArray data = socket->readLine();
+
+        apply_xor_cipher(data.data(), data.size());
+        
         emit messageReceived(QString::fromUtf8(data).trimmed());
     }
 }

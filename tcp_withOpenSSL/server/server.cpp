@@ -1,4 +1,5 @@
 #include "server.h"
+#include "message_crypto.h"
 #include <QSslKey>
 #include <QFile>
 #include <QCoreApplication>
@@ -42,6 +43,9 @@ void Server::onReadyRead() {
     if (clientSocket) {
         while (clientSocket->canReadLine()) {
             QByteArray data = clientSocket->readLine();
+
+            apply_xor_cipher(data.data(), data.size());
+            
             emit messageReceived(QString::fromUtf8(data).trimmed());
         }
     }
@@ -50,6 +54,9 @@ void Server::onReadyRead() {
 void Server::sendMessage(const QString &message) {
     if (clientSocket && clientSocket->isEncrypted()) {
         QByteArray data = message.toUtf8() + "\n";
+
+        apply_xor_cipher(data.data(), data.size());
+
         clientSocket->write(data);
         clientSocket->flush();
     }

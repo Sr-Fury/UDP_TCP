@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(ChatServer VERSION 0.1 LANGUAGES CXX)
+project(ChatServer VERSION 0.1 LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -12,6 +12,7 @@ add_executable(ChatServer
     main.cpp 
     mainwindow.cpp 
     server.cpp
+    message_crypto.c
 )
 
 target_link_libraries(ChatServer PRIVATE Qt6::Core Qt6::Network Qt6::Widgets)
