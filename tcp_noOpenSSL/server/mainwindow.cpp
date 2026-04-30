@@ -12,8 +12,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     statusBulb->setFixedSize(20, 20);
     statusBulb->setStyleSheet("QLabel { background-color: #D50000; border: 2px solid #8E0000; border-radius: 10px; }");
 
-    statusTitle = new QLabel("Chat Server (Port 1234)", this);
-    statusTitle->setStyleSheet("QLabel { font-weight: bold; color: #333; }");
+    statusTitle = new QLabel("Chat Server", this);
+    statusTitle->setStyleSheet("QLabel { font-weight: bold; color: white; }");
 
     topLayout->addWidget(statusBulb);
     topLayout->addWidget(statusTitle);

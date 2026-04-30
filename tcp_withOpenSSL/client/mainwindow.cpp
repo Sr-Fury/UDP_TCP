@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     statusBulb->setStyleSheet("QLabel { background-color: #D50000; border: 2px solid #8E0000; border-radius: 10px; }");
 
     statusTitle = new QLabel("Chat Client", this);
-    statusTitle->setStyleSheet("QLabel { font-weight: bold; color: #333; }");
+    statusTitle->setStyleSheet("QLabel { font-weight: bold; color: white; }");
 
     topLayout->addWidget(statusBulb);
     topLayout->addWidget(statusTitle);
